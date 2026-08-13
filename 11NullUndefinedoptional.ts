@@ -9,7 +9,7 @@ console.log("Exercise 54: Missing Nickname Checker");
 function checkNickname(nickname?: string): string {
 
     if(nickname){
-        return nickname
+        return "Nickname: "+nickname
     }
     return "Nickname Missing"
     // REQUIREMENTS:
@@ -48,11 +48,11 @@ console.log("Exercise 55: Selected Product Checker");
 
 function checkProduct(product: string | null): string {
 
-    if(product == null)
+    if(!product)
     {
       return "No Product Selected"  
     }
-    return "Selected : "+ product
+    return "Selected : "+product
     // REQUIREMENTS:
     //
     // If product is null:
@@ -211,7 +211,7 @@ function formatProfile(
     {
         return "Department Missing"
     }
-    return username+" | " +"email" +" | "+department
+    return username+" | " +email +" | "+department
     // REQUIREMENTS:
     //
     // Guard 1:
