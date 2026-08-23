@@ -81,13 +81,11 @@ function findSecondLargest(numbers: number[]): number {
   }
   uniquenumbers.sort((a, b) => b - a);
   console.log(uniquenumbers);
-  if (uniquenumbers.length >=2){
-    return uniquenumbers[1]
+  if (uniquenumbers.length >= 2) {
+    return uniquenumbers[1];
+  } else {
+    return -1;
   }
-  else{
-    return -1
-  }
-
 }
 
 // REQUIREMENTS:
@@ -135,3 +133,82 @@ console.log(findSecondLargest([-5, -10, -2, -5]));
 
 // Expected:
 // -5
+
+// ============================================================
+// CUMULATIVE CHALLENGE 3: Most Frequent Number
+// ============================================================
+
+console.log("Cumulative Challenge 3: Most Frequent Number");
+
+function findMostFrequent(numbers: number[]): number {
+  let frequencycounter: number = 0;
+  let highfrequency: number = 0;
+  let frequentNumber: number = -1;
+  for (let i = 0; i < numbers.length; i++) {
+    frequencycounter = 0;
+    for (let j = 0; j < numbers.length; j++) {
+      if (numbers[i] == numbers[j]) {
+        frequencycounter = frequencycounter + 1;
+      }
+    }
+    console.log(numbers[i] + ":" + frequencycounter);
+    if (highfrequency < frequencycounter) {
+      highfrequency = frequencycounter;
+      frequentNumber = numbers[i];
+    }
+  }
+  return frequentNumber
+}
+// REQUIREMENTS:
+//
+// Return the number that appears MOST OFTEN
+// in the array.
+//
+// If two or more numbers have the same
+// highest frequency, return the number that
+// appears FIRST in the original array.
+//
+// If the array is empty, return -1.
+//
+// Do not modify the original array.
+
+// TEST CASE 1
+
+console.log(findMostFrequent([4, 2, 4, 3, 4, 2]));
+
+// Expected:
+// 4
+
+// TEST CASE 2
+
+console.log(findMostFrequent([5, 7, 5, 7, 8]));
+
+// Expected:
+// 5
+//
+// 5 and 7 both appear twice.
+// 5 appears first in the original array.
+
+// TEST CASE 3
+
+console.log(findMostFrequent([10, 20, 20, 10, 30]));
+
+// Expected:
+// 10
+//
+// 10 and 20 both appear twice.
+// 10 appears first.
+
+// TEST CASE 4
+
+console.log(findMostFrequent([9]));
+
+// Expected:
+// 9
+
+// TEST CASE 5
+
+console.log(findMostFrequent([]));
+
+// Expected:
+// -1
