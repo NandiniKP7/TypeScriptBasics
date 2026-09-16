@@ -73,24 +73,27 @@ findStudentStatus(students, "Alex")
 // "Student not found"
 
 
-// const commands = [
-//     "  ADD:apple  ",
-//     "REMOVE:banana",
-//     "  add:orange",
-//     "STATUS",
-//     "hello"
-// ];
 
-// [
-//     "Added apple",
-//     "Removed banana",
-//     "Added orange",
-//     "Status requested",
-//     "Unknown command"
-// ]
 
-// function processCommands(commands: string[]): string[]
-// {
 
-// }
+const commands = [
+    "  ADD:apple  ",
+    "REMOVE:banana",
+    "  add:orange",
+    "STATUS",
+    "hello"
+];
+
+[
+    "Added apple",
+    "Removed banana",
+    "Added orange",
+    "Status requested",
+    "Unknown command"
+]
+
+function processCommands(commands: string[]): string[]
+{
+
+}
 
