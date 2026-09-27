@@ -49,26 +49,25 @@ type EmployeeReport = {
 //     { employeeName: "Maya", annualSalary: 84000, department: "IT" },
 //     { employeeName: "Nina", annualSalary: 72000, department: "Finance" }
 // ]
+function createEmployeeReports(
+  employees: Employee[]
+): EmployeeReport[] {
 
-function createEmployeeReports(employees: Employee[]): EmployeeReport[] {
-  let report = [];
-  let EmployeeReport = [
-      {
-        employeeName: "",
-        annualSalary: 0,
-        department: "",
-      },
-    ];
+  let reports: EmployeeReport[] = [];
+
   for (let i = 0; i < employees.length; i++) {
+
     if (employees[i].active === true) {
-      let employee = employees[i];
-      report.push(employee);
+
+      let employeeReport: EmployeeReport = {
+        employeeName: employees[i].name,
+        annualSalary: employees[i].monthlySalary * 12,
+        department: employees[i].department
+      };
+
+      reports.push(employeeReport);
     }
   }
-  for (let j = 0; j < report.length; j++) {
-   EmployeeReport[j].employeeName=report[j].name
-   EmployeeReport[j].annualSalary=report[j].monthlySalary*12
-   EmployeeReport[j].department=report[j].department
-  }
-  return EmployeeReport
+
+  return reports;
 }
