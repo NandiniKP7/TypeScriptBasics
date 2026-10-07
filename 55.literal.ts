@@ -237,5 +237,197 @@ function findTasksByStatus(t: task[], status: allowedTaskStatus) {
       newTask.push(t[i]);
     }
   }
-  return newTask
+  return newTask;
 }
+
+// ========================================
+// Exercise 4 — Feature Access
+// Difficulty: Hard
+// ========================================
+
+// Allowed plans:
+// "free", "standard", "premium"
+
+type allowedPlans = "free" | "standard" | "premium";
+
+// Create your AccountPlan literal type here
+
+// Allowed features:
+// "cloud-backup", "priority-support", "basic-reports"
+type allowedFeatures = "cloud-backup" | "priority-support" | "basic-reports";
+// Create your Feature literal type here
+
+// Create a User type with:
+// id       → number
+// name     → string
+// plan     → your account-plan literal type
+
+type User = {
+  id: number;
+  name: string;
+  plan: allowedPlans;
+};
+// Create a User array with:
+//
+// 101, Nina, free
+// 102, John, standard
+// 103, Maya, premium
+// 104, Sam, standard
+
+let user: User[] = [
+  { id: 101, name: "Nina", plan: "free" },
+  { id: 102, name: "John", plan: "standard" },
+  { id: 103, name: "Maya", plan: "premium" },
+  { id: 104, name: "Sam", plan: "standard" },
+];
+
+// Create canAccessFeature()
+//
+// Parameters:
+// - one User
+// - one feature
+//
+// Return:
+// - boolean
+//
+function canAccessFeature(user:User[],userName:string ,feature:allowedFeatures):boolean{
+  for (let i=0; i<user.length; i++)
+  {
+    if (userName== user[i].name && feature=="basic-reports")
+    {
+      return true
+    }
+    else if(userName== user[i].name && feature=="cloud-backup" && (user[i].plan=="premium" || user[i].plan=="standard"))
+    {
+      return true
+    }
+    else if(userName==user[i].name && feature=="priority-support" && user[i].plan=="premium")
+    {
+      return true
+    }
+   
+  }
+  return false
+}
+// Access rules:
+//
+// "basic-reports"
+// → everyone has access
+//
+// "cloud-backup"
+// → standard and premium have access
+//
+// "priority-support"
+// → premium only
+//
+// Examples:
+//
+// Nina + "basic-reports"       → true
+// Nina + "cloud-backup"        → false
+// John + "cloud-backup"        → true
+// Maya + "priority-support"    → true
+// Sam + "priority-support"     → false
+
+
+// TypeScript should reject invalid values such as:
+//
+// plan: "trial"
+//
+// canAccessFeature(user, "delete-account")
+
+// ========================================
+// Exercise 5 — FINAL BUILD
+// Task Status Update System
+// Difficulty: Hard
+// ========================================
+
+// Create a literal type for status.
+//
+// Allowed:
+// "todo"
+// "in-progress"
+// "completed"
+
+// Create a literal type for priority.
+//
+// Allowed:
+// "low"
+// "medium"
+// "high"
+
+// Create a Task type.
+//
+// Properties:
+//
+// id       → number
+// title    → string
+// status   → your status literal type
+// priority → your priority literal type
+
+// Create a Task array:
+//
+// 101
+// "Build login page"
+// "todo"
+// "high"
+//
+// 102
+// "Fix search bug"
+// "in-progress"
+// "medium"
+//
+// 103
+// "Update documentation"
+// "completed"
+// "low"
+//
+// 104
+// "Build dashboard"
+// "todo"
+// "medium"
+
+// Create updateTaskStatus()
+//
+// Parameters:
+//
+// - task array
+// - task ID
+// - new status
+//
+// Return:
+// string
+
+function updateTaskStatus(/* YOUR PARAMETERS */) {
+  // Find the task whose ID matches
+  // the requested task ID.
+  // If the task exists:
+  //
+  // Change ONLY its status.
+  //
+  // Return:
+  // "Task updated"
+  // If no task has the requested ID:
+  //
+  // Return:
+  // "Task not found"
+}
+
+// Example:
+//
+// updateTaskStatus(tasks, 101, "in-progress")
+//
+// Task 101 should become:
+//
+// {
+//   id: 101,
+//   title: "Build login page",
+//   status: "in-progress",
+//   priority: "high"
+// }
+//
+// Return:
+// "Task updated"
+
+// TypeScript should reject:
+//
+// updateTaskStatus(tasks, 101, "waiting");
