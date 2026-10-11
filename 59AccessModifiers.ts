@@ -137,12 +137,12 @@ class Order {
     this.customerName = customerName;
     ((this.status = "pending"), (this.items = []));
   }
-  getAddProduct(name: string, price: number, quantity: number):boolean {
+  getAddProduct(name: string, price: number, quantity: number): boolean {
     if (this.status == "pending" && price > 0 && quantity > 0) {
       this.items.push({ name: name, price: price, quantity: quantity });
-      return true
+      return true;
     }
-    return false
+    return false;
   }
   getCancelOrder() {
     if (this.status == "pending") {
@@ -159,13 +159,13 @@ class Order {
     return total;
   }
   getViewOrderDetails() {
-   return {
-    orderId:this.orderId,
-    customerName:this.customerName,
-    status:this.status,
-    items:this.items.length,
-    total:this.getOrderTotal()
-   }
+    return {
+      orderId: this.orderId,
+      customerName: this.customerName,
+      status: this.status,
+      items: this.items.length,
+      total: this.getOrderTotal(),
+    };
   }
 }
 const order1 = new Order(1001, "John");
@@ -181,3 +181,92 @@ console.log(order1.getAddProduct("Bread", 3, 1));
 console.log(order1.getCancelOrder());
 
 console.log(order1.getViewOrderDetails());
+
+console.log("----------------------------------");
+console.log("Exercise 3");
+console.log("----------------------------------------");
+
+type Book = {
+  bookId: number;
+  title: string;
+  author: string;
+};
+class LibraryMember {
+  readonly memberId: number;
+  public memberName: string;
+  private membershipStatus: string;
+  private borrowedBooks: Book[];
+
+  constructor(memberId: number, memberName: string) {
+    this.memberId = memberId;
+    this.memberName = memberName;
+    this.membershipStatus = "Active";
+    this.borrowedBooks = [];
+  }
+  borrowBook(book: Book) {
+    if (this.membershipStatus == "Active" && this.borrowedBooks.length < 3) {
+      for (let i = 0; i < this.borrowedBooks.length; i++) {
+        if (this.borrowedBooks[i].bookId == book.bookId) {
+          return false
+        }
+      } 
+      this.borrowedBooks.push(book)
+      return true
+    }
+    return false
+  }
+
+  returnBook(bookID: number) {
+    for (let i = 0; i < this.borrowedBooks.length; i++) {
+      if (this.borrowedBooks[i].bookId == bookID) {
+        this.borrowedBooks.splice(i,1);
+        return true 
+      }    
+    }
+    return false
+  }
+  suspendMembership() {
+    if (this.membershipStatus == "Active") {
+      this.membershipStatus = "Suspended";
+      return true;
+    }
+    return false;
+  }
+  getBorrwedBooks()
+  {
+    return[...this.borrowedBooks]
+  }
+
+  getMemberShipSummary()
+  {
+    return{
+      memberId:this.memberId,
+      memberName:this.memberName,
+      membershipStatus:this.membershipStatus,
+      borrowedBooks:this.borrowedBooks.length,
+      availableBooks:3-(this.borrowedBooks.length)
+    }
+  }
+}
+const member1 = new LibraryMember(101, "John");
+
+const book1 = { bookId: 1, title: "TypeScript Basics", author: "Alex" };
+const book2 = { bookId: 2, title: "Angular Guide", author: "Sarah" };
+const book3 = { bookId: 3, title: "Clean Code", author: "Robert" };
+const book4 = { bookId: 4, title: "Web Development", author: "David" };
+
+console.log(member1.borrowBook(book1)); // true
+console.log(member1.borrowBook(book2)); // true
+console.log(member1.borrowBook(book1)); // false
+console.log(member1.borrowBook(book3)); // true
+console.log(member1.borrowBook(book4)); // false
+
+console.log(member1.returnBook(2)); // true
+console.log(member1.borrowBook(book4)); // true
+
+console.log(member1.suspendMembership()); // true
+console.log(member1.borrowBook(book2)); // false
+console.log(member1.returnBook(1)); // true
+console.log(member1.suspendMembership()); // false
+
+console.log(member1.getMemberShipSummary());
